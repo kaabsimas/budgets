@@ -7,7 +7,7 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div class="container">
+    <div class="2xl:container mx-auto">
         <div class="navbar bg-primary bg-base-100">
             <div class="flex-1">
                 <Link :href="route('dashboard')" class="btn btn-ghost normal-case text-xl">
