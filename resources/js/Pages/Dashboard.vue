@@ -1,0 +1,27 @@
+<script setup>
+// import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/DaisyAuthenticatedLayout.vue';
+import { Head } from '@inertiajs/inertia-vue3';
+</script>
+
+<template>
+    <Head title="Dashboard" />
+
+    <AuthenticatedLayout>
+        <!-- <template #header>
+            <h2 class="font-semibold text-xl">
+                Dashboard
+            </h2>
+        </template> -->
+
+        <div class="">
+            <div class="max-w-7xl">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        You're logged in!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </AuthenticatedLayout>
+</template>
