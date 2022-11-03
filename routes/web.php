@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\LedgerController;
+use App\Models\Ledger;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +29,15 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user = Auth::user();
+    Log::debug("User", [$user]);
+    $ledgers = Ledger::where('user_id', $user->id)->with('user')->get();
+
+    return Inertia::render('Dashboard', compact('ledgers'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth', 'verified'])->prefix('/ledger')->group(function(){
+    Route::get('/{ledger}', [LedgerController::class, 'index'])->name('ledger.index');
+});
 
 require __DIR__.'/auth.php';

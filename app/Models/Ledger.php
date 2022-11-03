@@ -21,4 +21,9 @@ class Ledger extends Model
     {
         return LedgerFactory::new();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
