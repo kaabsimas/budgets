@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(Ledger::class);
             $table->string('name');
             $table->enum('type', ['asset', 'liability', 'revenue', 'expense']);//ativo circulante, passivo não-circulante, ativo não-circulante, passivo não-circulante
+            $table->timestamp('archived_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

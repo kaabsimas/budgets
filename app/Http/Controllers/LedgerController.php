@@ -11,7 +11,8 @@ class LedgerController extends Controller
 {
     public function index(Ledger $ledger)
     {
-        return Inertia::render('Ledger/Index', compact('ledger'));
+        $accounts = $ledger->accounts;
+        return Inertia::render('Ledger/Index', compact('ledger', 'accounts'));
     }
 
     public function list(): JsonResponse
