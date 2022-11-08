@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Ledger;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class LedgerFactory extends Factory
 {
+    protected $model = Ledger::class;
     /**
      * Define the model's default state.
      *

@@ -14,4 +14,14 @@ class Account extends Model
     {
         return $this->belongsTo(Ledger::class);
     }
+
+    public function estimations()
+    {
+        return $this->hasMany(Estimation::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

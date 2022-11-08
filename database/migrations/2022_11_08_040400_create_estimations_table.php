@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Account;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,14 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('estimations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('from_account_id')->constrained('accounts');
-            $table->foreignId('to_account_id')->constrained('accounts');
+            $table->foreignIdFor(Account::class);
             $table->decimal('amount', 15, 2);
             $table->text('description');
-            $table->timestamp('transfered_at');
-            $table->enum('status', ['estimated', 'pending', 'confirmed']);
+            $table->timestamp('expected_at');
+            $table->enum('status', ['pending', 'confirmed']);
+            $table->enum('type', ['income', 'expense']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('estimations');
     }
 };

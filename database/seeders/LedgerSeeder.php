@@ -26,7 +26,8 @@ class LedgerSeeder extends Seeder
             ['name' => 'Dívida Banco', 'type' => 'liability'],
             ['name' => 'Poupança', 'type' => 'asset'],
             ['name' => 'Escola', 'type' => 'expense'],
-            ['name' => 'Luz', 'type' => 'expense']
+            ['name' => 'Luz', 'type' => 'expense'],
+            ['name' => 'Ocasionais', 'type' => 'expense']
         ]);
 
         Ledger::factory()->create(['title' => 'Orçamento Empresa', 'user_id' => $user->id]);

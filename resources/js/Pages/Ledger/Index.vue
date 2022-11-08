@@ -4,11 +4,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 import AuthenticatedLayout from '@/Layouts/DaisyAuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 
-const props = defineProps(['ledger', 'accounts']);
+const props = defineProps(['ledger', 'estimations']);
 var month = (new Date()).toLocaleString('default', {month: 'long'});
 
-const assets = props.accounts.filter(acc => acc.type == 'asset');
-const liabilities = props.accounts.filter(acc => acc.type == 'liability');
+const assets = props.estimations.filter(acc => acc.type == 'income');
+const liabilities = props.estimations.filter(acc => acc.type == 'expense');
+const assetsTotal = assets.reduce((acc, current) => (acc += parseFloat(current.amount)), 0);
+const expensesTotal = liabilities.reduce((acc, current) => (acc += parseFloat(current.amount)), 0);
 // inserir uma coluna com apenas transações "estimated"
 // quando essas transações forem confirmadas, não será alterado seu 
 // status, mas criada uma nova transação do tipo confirmed.
@@ -32,8 +34,8 @@ const liabilities = props.accounts.filter(acc => acc.type == 'liability');
                             </thead>
                             <tbody class="bg-red-200">
                                 <tr v-for="liability in liabilities" :key="liability.id">
-                                    <td class="pl-2">{{liability.name}}</td>
-                                    <td class="pl-2">{{(0).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}}</td>
+                                    <td class="pl-2">{{liability.account.name}}</td>
+                                    <td class="pl-2">{{parseFloat(liability.amount).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -48,8 +50,8 @@ const liabilities = props.accounts.filter(acc => acc.type == 'liability');
                             </thead>
                             <tbody class="bg-blue-200">
                                 <tr v-for="asset in assets" :key="asset.id">
-                                    <td class="pl-2">{{asset.name}}</td>
-                                    <td class="pl-2">{{(0).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}}</td>
+                                    <td class="pl-2">{{asset.account.name}}</td>
+                                    <td class="pl-2">{{parseFloat(asset.amount).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -62,15 +64,17 @@ const liabilities = props.accounts.filter(acc => acc.type == 'liability');
                     <table class="table table-compact w-80">
                         <tr>
                             <td>Despesas Fixas</td>
-                            <td></td>
+                            <td>
+                                {{ expensesTotal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) }}
+                            </td>
                         </tr>
                         <tr>
                             <td>Entradas</td>
-                            <td></td>
+                            <td>{{ assetsTotal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) }}</td>
                         </tr>
                         <tr>
-                            <td>Resto</td>
-                            <td></td>
+                            <td>Resto Mês</td>
+                            <td>{{ (assetsTotal - expensesTotal).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) }}</td>
                         </tr>
                         <tr>
                             <td>Soma Incidentais</td>

@@ -32,4 +32,9 @@ class Ledger extends Model
     {
         return $this->hasMany(Account::class);
     }
+
+    public function estimations()
+    {
+        return $this->hasManyThrough(Estimation::class, Account::class);
+    }
 }
