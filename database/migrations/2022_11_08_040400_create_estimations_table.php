@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('amount', 15, 2);
             $table->text('description');
             $table->timestamp('expected_at');
-            $table->enum('status', ['pending', 'confirmed']);
+            $table->enum('status', ['pending', 'partial', 'confirmed']);
             $table->enum('type', ['income', 'expense']);
             $table->softDeletes();
             $table->timestamps();
