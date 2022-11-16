@@ -1,6 +1,5 @@
 <script setup>
-import { Inertia } from '@inertiajs/inertia'
-import { Link } from '@inertiajs/inertia-vue3'
+import NewTransaction from '@/Pages/Ledger/Components/NewTransaction.vue';
 import AuthenticatedLayout from '@/Layouts/DaisyAuthenticatedLayout.vue';
 import Estimations from '@/Pages/Ledger/Components/Estimations.vue';
 import Summary from '@/Pages/Ledger/Components/Summary.vue';
@@ -22,6 +21,7 @@ const expensesTotal = liabilities.reduce((acc, current) => (acc += parseFloat(cu
 <template>
     <Head :title="ledger.title" />
     <AuthenticatedLayout>
+        <NewTransaction />
         <div class="flex">
             <div class="bg-rose-100 m-1 border-gray-300 border-solid rounded h-fit w-1/3">
                 <div class="mx-auto w-fit">{{month}}</div>
