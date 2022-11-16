@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ledger;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,7 +13,13 @@ class LedgerController extends Controller
 {
     public function index(Ledger $ledger)
     {
-        $estimations = $ledger->estimations()->with('account')->get();
+        $today = Carbon::now();
+
+        $estimations = $ledger
+            ->estimations()
+            ->whereBetween('expected_at', [$today->startOfMonth()->toDateTimeString(), $today->endOfMonth()->toDateTimeString()])
+            ->with('account')->get();
+            
         return Inertia::render('Ledger/Index', compact('ledger', 'estimations'));
     }
 
