@@ -19,8 +19,17 @@ class LedgerController extends Controller
             ->estimations()
             ->whereBetween('expected_at', [$today->startOfMonth()->toDateTimeString(), $today->endOfMonth()->toDateTimeString()])
             ->with('account')->get();
+        
+        $accounts = $ledger->accounts;
+
+        $transactions = $ledger
+            ->transactions()
+            ->whereBetween('transfered_at', [$today->startOfMonth()->toDateTimeString(), $today->endOfMonth()->toDateTimeString()])
+            ->with(['fromAccount', 'toAccount'])
+            ->orderBy('transfered_at')
+            ->get();
             
-        return Inertia::render('Ledger/Index', compact('ledger', 'estimations'));
+        return Inertia::render('Ledger/Index', compact('ledger', 'estimations', 'accounts', 'transactions'));
     }
 
     public function list(): JsonResponse

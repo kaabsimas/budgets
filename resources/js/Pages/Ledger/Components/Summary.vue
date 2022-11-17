@@ -1,9 +1,9 @@
 <script setup>
-    const props = defineProps(['assetsTotal', 'expensesTotal']);
+    const props = defineProps(['assetsTotal', 'expensesTotal', 'ocasionals']);
 </script>
 <template>
     <div class="">
-        <table class="table table-compact w-80">
+        <table class="table table-compact w-full mb-5">
             <tr>
                 <td>Despesas Fixas</td>
                 <td>
@@ -20,11 +20,11 @@
             </tr>
             <tr>
                 <td>Soma Incidentais</td>
-                <td></td>
+                <td>{{ ocasionals.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) }}</td>
             </tr>
             <tr class="bg-base-300">
                 <td>Resto</td>
-                <td></td>
+                <td>{{ (assetsTotal - expensesTotal - ocasionals).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) }}</td>
             </tr>
         </table>
     </div>

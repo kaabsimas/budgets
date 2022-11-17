@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LedgerController;
+use App\Http\Controllers\TransactionController;
 use App\Models\Ledger;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('/ledger')->group(function(){
     Route::get('/{ledger}', [LedgerController::class, 'index'])->name('ledger.index');
+    Route::post('/{ledger}/transaction', [TransactionController::class, 'store'])->name('ledger.transaction.store');
+    Route::delete('/{ledger}/transaction/{transaction}', [TransactionController::class, 'delete'])->name('ledger.transaction.delete');
 });
 
 require __DIR__.'/auth.php';
