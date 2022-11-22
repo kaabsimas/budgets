@@ -1,11 +1,17 @@
 import './bootstrap';
 import '../css/app.css';
-import tailVueSelect from 'tailwindcss-vue-select'
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core';
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faUser);
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -16,6 +22,7 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },
 });

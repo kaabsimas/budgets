@@ -21,7 +21,7 @@ var ocasionals = props.transactions.reduce((acc, current) => (acc += parseFloat(
         <NewTransaction :ledger="ledger" :accounts="accounts" />
         <div class="flex">
             <div class="bg-rose-100 m-1 border-gray-300 border-solid rounded h-fit w-1/3">
-                <div class="mx-auto w-fit">{{month}}</div>
+                <div class="flex px-2">&lt;&lt; <div class="mx-auto w-fit">{{month}}</div> &gt;&gt;</div>
                 <Estimations :estimations="estimations" />
             </div>
             <div class="flex-none w-2/3">

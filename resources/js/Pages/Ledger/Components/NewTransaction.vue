@@ -21,7 +21,7 @@
             <div class="form-control">
                 <div class="input-group input-group-xs">
                     <span>Data</span>
-                    <input type="date" v-model="form.date" class="input input-bordered input-xs" autofocus>
+                    <input type="date" v-model="form.date" class="input input-bordered input-xs form-input" autofocus>
                 </div>
                 <label class="label" v-if="form.errors.date">
                     <span class="label-text-alt text-error">{{ form.errors.date }}</span>
