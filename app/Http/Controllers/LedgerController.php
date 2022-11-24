@@ -20,8 +20,10 @@ class LedgerController extends Controller
         } else if($request->missing("display_month")){ 
             $displayDate = Carbon::now();
             $request->session()->put('display_month', $displayDate);
-        } else {
+        } else if($request->session()->has("display_month")){
             $displayDate = $request->session()->get('display_month');
+        } else {
+            $displayDate = Carbon::now();
         }
 
         $estimations = $ledger

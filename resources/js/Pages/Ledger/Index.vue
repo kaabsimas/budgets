@@ -7,9 +7,6 @@ import { Head } from '@inertiajs/inertia-vue3';
 import MonthSelect from '@/Pages/Ledger/Components/MonthSelect.vue';
 
 const props = defineProps(['displayDate', 'ledger', 'estimations', 'accounts', 'transactions']);
-var month = '2022-11';//(new Date()).toLocaleString('default', {month: 'long'});
-
-
 
 const assets = props.estimations.filter(acc => acc.type == 'income');
 const liabilities = props.estimations.filter(acc => acc.type == 'expense');
