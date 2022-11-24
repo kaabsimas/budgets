@@ -1,10 +1,10 @@
 <script setup>
     import { Inertia } from '@inertiajs/inertia';
     
-    const props = defineProps({date: Date});
+    const props = defineProps({month: String});
 
     function backOneMonth() {
-        var date = props.date;
+        var date = new Date(month);
         
         date.setMonth(date.getMonth() - 1);
 
@@ -12,7 +12,7 @@
     }
 
     function forwardOneMonth() {
-        var date = props.date;
+        var date = new Date(month);
             
         date.setMonth(date.getMonth() + 1);
 
@@ -25,7 +25,7 @@
     <div class="flex items-center px-2">
         <font-awesome-icon icon="fa-backward" class="hover:bg-rose-400 rounded p-2 active:bg-rose-200" @click="backOneMonth()" />
         <div class="mx-auto w-fit">
-            {{ date.toLocaleDateString('default', {month:'long', year: 'numeric'}) }}
+            {{ (new Date(month)).toLocaleDateString('default', {month:'long', year: 'numeric'}) }}
         </div> 
         <font-awesome-icon icon="fa-forward" class="hover:bg-rose-400 rounded p-2 active:bg-rose-200" @click="forwardOneMonth()" />
     </div>

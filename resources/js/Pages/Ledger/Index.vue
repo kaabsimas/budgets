@@ -6,7 +6,7 @@ import Summary from '@/Pages/Ledger/Components/Summary.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 import MonthSelect from '@/Pages/Ledger/Components/MonthSelect.vue';
 
-const props = defineProps(['displayDate', 'ledger', 'estimations', 'accounts', 'transactions']);
+const props = defineProps(['displayMonth', 'ledger', 'estimations', 'accounts', 'transactions']);
 
 const assets = props.estimations.filter(acc => acc.type == 'income');
 const liabilities = props.estimations.filter(acc => acc.type == 'expense');
@@ -21,7 +21,7 @@ var ocasionals = props.transactions.reduce((acc, current) => (acc += parseFloat(
         <NewTransaction :ledger="ledger" :accounts="accounts" />
         <div class="flex">
             <div class="bg-rose-100 m-1 border-gray-300 border-solid rounded h-fit w-1/3">
-                <MonthSelect :date="displayDate" />
+                <MonthSelect :month="displayMonth" />
                 <Estimations :estimations="estimations" />
             </div>
             <div class="flex-none w-2/3">

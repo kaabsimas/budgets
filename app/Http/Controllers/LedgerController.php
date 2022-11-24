@@ -14,17 +14,17 @@ class LedgerController extends Controller
 {
     public function index(Ledger $ledger, Request $request)
     {
-        if($request->has("display_month") && $request->session()->missing("display_month")) {
-            $displayDate = Carbon::create($request->display_month);
-            $request->session()->put('display_month', $displayDate);
-        } else if($request->missing("display_month")){ 
-            $displayDate = Carbon::now();
+        if($request->has("display_month")) {
+            $displayDate = Carbon::createFromFormat('Y-m', $request->display_month);
             $request->session()->put('display_month', $displayDate);
         } else if($request->session()->has("display_month")){
-            $displayDate = $request->session()->get('display_month');
+            $aux = $request->session()->get('display_month');
+            $displayDate = Carbon::createFromFormat('Y-m', $aux);
         } else {
             $displayDate = Carbon::now();
         }
+
+        $request->session()->put('display_month', $displayDate);
 
         $estimations = $ledger
             ->estimations()
@@ -39,8 +39,10 @@ class LedgerController extends Controller
             ->with(['fromAccount', 'toAccount'])
             ->orderBy('transfered_at')
             ->get();
+
+        $displayMonth = $displayDate->format('Y-m');
             
-        return Inertia::render('Ledger/Index', compact('ledger', 'estimations', 'accounts', 'transactions', 'displayDate'));
+        return Inertia::render('Ledger/Index', compact('ledger', 'estimations', 'accounts', 'transactions', 'displayMonth'));
     }
 
     public function list(): JsonResponse
