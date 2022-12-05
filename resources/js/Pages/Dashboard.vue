@@ -1,7 +1,7 @@
 <script setup>
 import { Inertia } from '@inertiajs/inertia'
 // import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import AuthenticatedLayout from '@/Layouts/DaisyAuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/VuetifyAuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['ledgers']);

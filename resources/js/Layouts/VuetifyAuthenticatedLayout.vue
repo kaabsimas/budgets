@@ -7,17 +7,13 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div class="container 2xl:container mx-auto">
-        <div class="navbar bg-primary w-100 z-50">
-            <div class="flex-1">
-                <Link :href="route('dashboard')" class="btn btn-ghost normal-case text-xl">
-                    <ApplicationLogo class="block h-9 w-auto" />
-                </Link>
-                <ul class="menu menu-horizontal p-0">
-                    <li><Link :href="route('dashboard')">Painel</Link></li>
-                </ul>
-            </div>
-            <div class="flex-1 flex-row-reverse ">
+    <v-app>
+        <v-app-bar>
+            <template v-slot:prepend>
+                <ApplicationLogo class="block h-9 w-auto" />
+            </template>
+            <v-app-bar-title>Budgets</v-app-bar-title>
+            <template v-slot:append>
                 <ul class="menu menu-horizontal p-0">
                     <li>
                         <a>
@@ -31,8 +27,8 @@ const showingNavigationDropdown = ref(false);
                         </ul>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </template>
+        </v-app-bar>
         <!-- Page Heading -->
         <header class="" v-if="$slots.header">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -41,8 +37,8 @@ const showingNavigationDropdown = ref(false);
         </header>
 
         <!-- Page Content -->
-        <main>
+        <v-main>
             <slot />
-        </main>
-    </div>
+        </v-main>
+    </v-app>
 </template>
