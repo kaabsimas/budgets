@@ -14,19 +14,16 @@ const showingNavigationDropdown = ref(false);
             </template>
             <v-app-bar-title>Budgets</v-app-bar-title>
             <template v-slot:append>
-                <ul class="menu menu-horizontal p-0">
-                    <li>
-                        <a>
-                            <!-- <font-awesome-icon icon="fa-user" /> -->
-                            <v-icon icon="mdi-account"></v-icon>
-                            {{ $page.props.auth.user.name }}
-                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
-                        </a>
-                        <ul class="menu menu-compact bg-primary w-56 p-2 z-40">
-                            <li><Link :href="route('logout')" method="post" as="button">Logout</Link></li>
-                        </ul>
-                    </li>
-                </ul>
+                <v-btn class="hover:text-slate-100" color="primary" prepend-icon="mdi-account" append-icon="mdi-chevron-down">
+                    {{ $page.props.auth.user.name }}
+                    <v-menu activator="parent">
+                        <v-list>
+                            <v-list-item>
+                                <Link :href="route('logout')" method="post" as="button">Logout</Link>
+                            </v-list-item>
+                        </v-list>
+                    </v-menu>
+                </v-btn>
             </template>
         </v-app-bar>
         <!-- Page Heading -->
@@ -35,7 +32,7 @@ const showingNavigationDropdown = ref(false);
                 <slot name="header" />
             </div>
         </header>
-
+        
         <!-- Page Content -->
         <v-main>
             <slot />
