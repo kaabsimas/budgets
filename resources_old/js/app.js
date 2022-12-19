@@ -23,7 +23,6 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(vuetify)
-            // .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },
 });
